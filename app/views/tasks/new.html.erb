@@ -1,0 +1,19 @@
+<h1>タスクの新規登録</h1>
+
+<%= form_for @task do |form| %>
+<ul>
+  <li>
+    <%= form.label :name %><%= form.text_field :name %>
+  </li>
+  <li>
+    <%= form.label :due_date %>
+    <%= form.date_select :due_date, :use_month_numbers => true,
+                         :order => [:year, :month, :day ],
+                         :start_year => Time.current.year,
+                         :end_year => Time.current.year + 1 %>
+  </li>
+  <li><%= form.check_box :done %><%= form.label :done %></li>
+  <li><%= form.label :description %><%= form.text_area :description %></li>
+  <li><%= form.submit %></li>
+</ul>
+<% end %>

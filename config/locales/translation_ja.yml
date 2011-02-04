@@ -1,0 +1,15 @@
+ja:
+  activerecord:
+    models:
+      task: "タスク"  #g
+
+    attributes:
+      task:
+        name: "名称"  #g
+        description: "説明"  #g
+        due_date: "期限"  #g
+        done: "実施済み"  #g
+
+  railties:
+    scaffold:
+      new: "新規登録"
