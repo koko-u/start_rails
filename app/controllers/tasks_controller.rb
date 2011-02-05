@@ -1,6 +1,27 @@
 class TasksController < ApplicationController
   def index
-    @tasks = Task.where(:done => false)
+    @tasks = Task.unfinished
+  end
+  def done
+    @tasks = Task.finished
+    render :action => 'index'
+  end
+
+  def finish
+    @task = Task.find(params[:id])
+    @task.update_attribute(:done, true)
+    redirect_to tasks_path
+  end
+  def restart
+    @task = Task.find(params[:id])
+    @task.update_attribute(:done, false)
+    redirect_to done_tasks_path
+  end
+
+  def search
+    @tasks = Task.unfinished
+    @tasks = @tasks.search(params[:query]) if params[:query].present?
+    render :action => 'index'
   end
 
   def show
@@ -32,9 +53,4 @@ class TasksController < ApplicationController
     redirect_to tasks_path
   end
 
-  def finish
-    @task = Task.find(params[:id])
-    @task.update_attribute(:done, true)
-    redirect_to tasks_path
-  end
 end

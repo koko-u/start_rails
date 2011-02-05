@@ -1,5 +1,29 @@
 <h1>タスクの一覧</h1>
 
+<%= form_tag [:search, :tasks], :method => :get,
+             :style => "text-align: right" do %>
+<%= text_field_tag "query", params[:query] %>
+<%= submit_tag t(:search, :default => "Search", :scope => [:view, :title]) %>
+<% end %>
+
+<% unfinished_title = t(:unfinished_task, :default => "Unfinihed", :scope => [:view, :title]) %>
+<% finished_title   = t(:finished_task, :default => "Finished", :scope => [:view, :title]) %>
+<ul class="navigation">
+  <% if params[:action] == 'index' %>
+    <li class="selected"><%= unfinished_title %></li>
+  <% else %>
+    <li><%= link_to unfinished_title, tasks_path %></li>
+  <% end %>
+  <% if params[:action] == 'done' %>
+    <li class="selected"><%= finished_title %></li>
+  <% else %>
+    <li><%= link_to finished_title, done_tasks_path %></li>
+  <% end %>
+  <% if params[:action] == 'search' %>
+    <li class="selected"><%= t(:search_result, :default => 'Searched', :scope => [:view, :title]) %></li>
+  <% end %>
+</ul>
+
 <table class="tasks">
   <colgroup class="name" />
   <colgroup class="due_date" />
@@ -8,15 +32,20 @@
   <tr>
     <td><%= link_to task.name, task %></td>
     <td><%= task.due_date %></td>
-    <td><%= link_to t(:edit, :default => "Edit", :scope => [:railties, :scaffold]),
+    <td><%= link_to t(:edit, :default => "Edit", :scope => [:view, :title]),
                     edit_task_path(task) %></td>
-    <td><%= link_to t(:finish, :default => "Finish", :scope => [:railties, :scaffold]),
-                    finish_task_path(task), :method => :put %></td>
-    <td><%= link_to t(:destroy, :default => "Destroy", :scope => [:railties, :scaffold]),
+    <% if task.done? %>
+      <td><%= link_to t(:restart, :default => "Restart", :scope => [:view, :title]),
+                      restart_task_path(task), :method => :put %></td>
+    <% else %>
+      <td><%= link_to t(:finish, :default => "Finish", :scope => [:view, :title]),
+                      finish_task_path(task), :method => :put %></td>
+    <% end %>
+    <td><%= link_to t(:destroy, :default => "Destroy", :scope => [:view, :title]),
                     task, :method => :delete,
-                    :confirm => t(:are_you_sure?, :default => "Are you sure?", :scope => [:railties, :scaffold]) %></td>
+                    :confirm => t(:are_you_sure?, :default => "Are you sure?", :scope => [:view, :message]) %></td>
   </tr>
   <% end %>
 </table>
-<%= link_to t(:new, :default => "New", :scope => [:railties, :scaffold]),
+<%= link_to t(:new, :default => "New", :scope => [:view, :title]),
     new_task_path %>
