@@ -14,3 +14,10 @@ names.each_with_index do |name, i|
               :due_date => (i-2).days.from_now, :done => i.zero?
               )
 end
+
+# ダミーデータ
+200.times do |n|
+  Task.create(:name => "Task #{n}", :description => description,
+              :due_date => (n+3).days.from_now, :done => false)
+end
+

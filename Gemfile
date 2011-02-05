@@ -26,6 +26,7 @@ gem 'thin'
 gem 'wirble'
 gem 'i18n_generators'
 gem 'jquery-rails'
+gem 'will_paginate', '~> 3.0.beta'
 
 # Bundle gems for the local environment. Make sure to
 # put test-only gems in this group so their generators

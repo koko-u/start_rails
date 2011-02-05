@@ -24,6 +24,8 @@ ja:
       restart: "再開"
       search: "検索"
       search_result: "検索結果"
+      prev: "←前"
+      next: "次→"
     message:
       "are_you_sure?": "本当に削除してよいですか？"
 
