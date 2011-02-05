@@ -14,12 +14,16 @@ table.tasks td {
   padding: 5px;
 }
 
-table.tasks col.name {
+table.tasks colgroup.name {
   width: 320px;
 }
 
-table.tasks col.due_date {
+table.tasks colgroup.due_date {
   background-color: #ddd;
+}
+
+table.tasks colgroup.link {
+    background-color: #f5f5f5;
 }
 
 div#task_due_date {

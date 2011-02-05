@@ -1,14 +1,17 @@
 <h1>タスクの一覧</h1>
 
 <table class="tasks">
-  <col class="name" />
-  <col class="due_date" />
+  <colgroup class="name" />
+  <colgroup class="due_date" />
+  <colgroup class="link" span="3" />
   <% @tasks.each do |task| %>
   <tr>
     <td><%= link_to task.name, task %></td>
     <td><%= task.due_date %></td>
     <td><%= link_to t(:edit, :default => "Edit", :scope => [:railties, :scaffold]),
                     edit_task_path(task) %></td>
+    <td><%= link_to t(:finish, :default => "Finish", :scope => [:railties, :scaffold]),
+                    finish_task_path(task), :method => :put %></td>
     <td><%= link_to t(:destroy, :default => "Destroy", :scope => [:railties, :scaffold]),
                     task, :method => :delete,
                     :confirm => t(:are_you_sure?, :default => "Are you sure?", :scope => [:railties, :scaffold]) %></td>
