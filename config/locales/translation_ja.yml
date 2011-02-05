@@ -13,3 +13,6 @@ ja:
   railties:
     scaffold:
       new: "新規登録"
+      edit: "修正"
+      destroy: "削除"
+      "are_you_sure?": "本当に削除してよいですか？"
